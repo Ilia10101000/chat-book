@@ -1,15 +1,22 @@
 import InputMask from "react-input-mask";
-import { TextField } from "@mui/material";
+import { TextField, Box } from "@mui/material";
 
 const CustomeInput = (props: any) => {
   if (props.mask) {
     return (
-      <InputMask {...props} maskChar={""} alwaysShowMask={false}>
-        {(prop: any) => <TextField {...prop} />}
-      </InputMask>
+      <Box>
+        <InputMask 
+        {...props} maskChar={""} alwaysShowMask={false}>
+          {(prop: any) => <TextField {...prop} />}
+        </InputMask>
+      </Box>
     );
   }
-  return <TextField {...props} />;
+  return (
+    <Box>
+      <TextField {...props}/>
+    </Box>
+      );
 };
 
 export { CustomeInput };

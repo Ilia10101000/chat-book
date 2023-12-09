@@ -31,7 +31,7 @@ const ValidationSchema = Yup.object({
     .required("Email is required"),
   name: Yup.string()
     .min(2, "Enter your name")
-    .matches(/^[a-zA-Zа-яА-Я\s]+$/, "Check typed value")
+    .matches(/^(?!-)(?!.*-\s*-)[A-Za-zА-Яа-яЁё -]+$/,'Check typed value')
     .required("Name is required"),
   phone: Yup.string()
     .min(18, "Enter valid phone")
@@ -95,7 +95,7 @@ function Forms() {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Stack direction="column" sx={{ gap: 3, alignItems: "center" }}>
+      <Stack direction="column" sx={{ gap: 5, alignItems: "center" }}>
         {formsList.map((form) => (
           <CustomeInput
             autoComplete="off"

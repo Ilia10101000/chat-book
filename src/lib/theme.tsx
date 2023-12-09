@@ -18,6 +18,16 @@ function Theme({ children }: ThemeProps) {
       palette: {
         mode:mode
       },
+      components: {
+        MuiFormHelperText: {
+          styleOverrides: {
+            root: {
+              position: 'absolute',
+              top: '55px'
+            }
+          }
+        }
+      }
     });
   }, [mode]);
 
