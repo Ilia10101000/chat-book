@@ -2,7 +2,7 @@
 import { CustomeInput } from "./CustomeInput";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import {ValidationSchema,formsList} from '@/lib/formsParam'
 
 
@@ -29,9 +29,6 @@ function Forms() {
         sx={{
           gap: 5,
           alignItems: "center",
-          p: 4, 
-          background: "rgba(255, 255, 255,0.5)",
-          borderRadius: "10px",
         }}
       >
         {formsList.map((form) => (
