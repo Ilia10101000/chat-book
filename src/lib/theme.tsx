@@ -16,7 +16,7 @@ function Theme({ children }: ThemeProps) {
     const theme = useMemo(() => {
     return createTheme({
       palette: {
-        mode:mode
+        mode,
       },
       components: {
         MuiFormHelperText: {

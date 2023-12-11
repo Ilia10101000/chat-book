@@ -5,10 +5,10 @@ const CustomeInput = (props: any) => {
   if (props.mask) {
     return (
       <Box>
-        <InputMask 
-        {...props} maskChar={""} alwaysShowMask={false}>
-          {(prop: any) => <TextField {...prop} />}
-        </InputMask>
+          <InputMask
+            {...props} maskChar={""} alwaysShowMask={false}>
+            {(prop: any) => <TextField {...prop} />}
+          </InputMask>
       </Box>
     );
   }
