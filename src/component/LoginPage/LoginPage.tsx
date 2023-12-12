@@ -29,8 +29,10 @@ const LoginPage = () => {
           left: 0,
           bottom: 0,
           zIndex: -1,
-          background:
-            "linear-gradient(45deg, rgba(136,0,255,1) 0%, rgba(53,46,232,1) 23%, rgba(68,212,236,1) 56%, rgba(0,255,76,1) 100%)",
+          background: (theme) =>
+            theme.palette.mode === "light"
+              ? "linear-gradient(45deg, rgba(136,0,255,1) 0%, rgba(53,46,232,1) 23%, rgba(68,212,236,1) 56%, rgba(0,255,76,1) 100%)"
+              : "linear-gradient(45deg, rgba(0,0,4,1) 0%, rgba(13,0,87,1) 31%, rgba(49,0,108,1) 61%, rgba(135,5,5,1) 100%)",
         },
       }}
     >
@@ -43,5 +45,8 @@ const LoginPage = () => {
     </Box>
   );
 };
+
+
+
 
 export { LoginPage };
