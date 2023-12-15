@@ -37,12 +37,14 @@ function Theme({ children }: ThemeProps) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{
-        position: 'absolute',
-        top: '15px',
-        right:'15px'
-        
-      }}>
+      <Box
+        sx={{
+          position: "absolute",
+          top: "13px",
+          right: "15px",
+          zIndex: 10000,
+        }}
+      >
         {mode === "light" ? (
           <NightsStayIcon
             fontSize="large"
@@ -57,7 +59,19 @@ function Theme({ children }: ThemeProps) {
           />
         )}
       </Box>
-      <Container>{children}</Container>
+      <Container
+        maxWidth={false}
+        sx={{
+          minHeight:'100vh',
+          zIndex: -1,
+          background: (theme) =>
+            theme.palette.mode === "light"
+              ? "linear-gradient(45deg, rgba(136,0,255,1) 0%, rgba(53,46,232,1) 23%, rgba(68,212,236,1) 56%, rgba(0,255,76,1) 100%)"
+              : "linear-gradient(45deg, rgba(0,0,4,1) 0%, rgba(13,0,87,1) 31%, rgba(49,0,108,1) 61%, rgba(135,5,5,1) 100%)",
+        }}
+      >
+        {children}
+      </Container>
     </ThemeProvider>
   );
 }
