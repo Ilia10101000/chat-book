@@ -1,7 +1,6 @@
 "use client";
 import {
   Box,
-  Button,
   CssBaseline,
   Divider,
   IconButton,
@@ -19,26 +18,19 @@ import MuiDrawer from "@mui/material/Drawer";
 import { ReactNode, useState } from "react";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import EmailIcon from "@mui/icons-material/Email";
+import MenuIcon from "@mui/icons-material/Menu";
 import GroupIcon from "@mui/icons-material/Group";
 import TuneIcon from "@mui/icons-material/Tune";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
 const drawerListItems = [
-  {
-    label: "Friends",
-    icon: GroupIcon,
-  },
-  {
-    label: "Message",
-    icon: EmailIcon,
-  },
-  {
-    label: "Setting",
-    icon: TuneIcon,
-  },
+  { label: "Friends", icon: <GroupIcon /> },
+  { label: "Message", icon: <EmailIcon /> },
+  { label: "Settings", icon: <TuneIcon /> },
 ];
 
 const drawerWidth = 240;
@@ -130,7 +122,7 @@ export default function CustomeBar({ children }: { children: ReactNode }) {
               ...(open && { display: "none" }),
             }}
           >
-            Click
+            <MenuIcon />
           </IconButton>
           <Typography variant="h6">Custome Bar</Typography>
         </Toolbar>
@@ -138,12 +130,12 @@ export default function CustomeBar({ children }: { children: ReactNode }) {
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            Close
+            <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
-          {drawerListItems.map(({ label, icon }) => (
+          {drawerListItems.map(({label,icon}) => (
             <ListItemButton
               key={label}
               sx={{
@@ -159,8 +151,7 @@ export default function CustomeBar({ children }: { children: ReactNode }) {
                   justifyContent: "center",
                 }}
               >
-                    {icon && <icon/>}
-                {/* <GroupIcon /> */}
+                {icon}
               </ListItemIcon>
               <ListItemText
                 primary={label}
@@ -172,7 +163,7 @@ export default function CustomeBar({ children }: { children: ReactNode }) {
           ))}
         </List>
       </Drawer>
-      <Box component="main">
+      <Box component="main" sx={{flexGrow:1}}>
         <DrawerHeader />
         {children}
       </Box>

@@ -27,6 +27,11 @@ function Theme({ children }: ThemeProps) {
             },
           },
         },
+        MuiStack: {
+          defaultProps: {
+            useFlexGap:true
+          }
+        }
       },
     });
   }, [mode]);
@@ -39,7 +44,7 @@ function Theme({ children }: ThemeProps) {
       <CssBaseline />
       <Box
         sx={{
-          position: "absolute",
+          position: "fixed",
           top: "13px",
           right: "15px",
           zIndex: 10000,
@@ -60,6 +65,7 @@ function Theme({ children }: ThemeProps) {
         )}
       </Box>
       <Container
+        disableGutters={true}
         maxWidth={false}
         sx={{
           minHeight:'100vh',

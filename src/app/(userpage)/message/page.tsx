@@ -1,8 +1,45 @@
+import { MessageList } from "@/component/MessagePage/MessageList";
 
-const MessagePage =  () => {
-    return (
-        <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti alias eos ad tenetur porro repudiandae praesentium numquam perferendis rerum velit, modi consectetur cupiditate! Voluptatum, nihil. Incidunt enim dolore rem magni, pariatur ut natus hic nihil ullam, sint numquam eveniet aperiam accusantium laboriosam a velit.</div>
-    )
-}
+const messageList = [
+  {
+    text: "HelloHell oHelloHe lloHelloHelloHelloHell oHelloHelloHelloHelloHelloHello HelloHelloHelloHelloHelloHelloHello",
+  },
+  {
+    text: "HelloHelloHell  oHelloHelloHelloHe lloHelloHelloHello HelloHelloHelloHelloHelloHelloHelloHelloHello",
+  },
+  {
+    text: "HelloHell oHelloHelloHelloHe lloHelloHelloHelloHe lloHelloHelloHe lloHelloHelloHelloHelloHelloHello",
+  },
+  {
+    text: "Hello",
+  },
+  {
+    text: "?",
+  },
+  {
+    text: "HelloHelloHe  lloHelloHelloHelloHelloHelloHello HelloHelloHelloHelloHelloHelloHelloHelloHelloHel loHelloHelloHelloHelloHelloHelloHelloHelloHelloHello",
+  },
+  {
+    text: "...",
+  },
+  {
+    text: "HelloHelloHelloHelloHelloHelloHe lloHelloHelloHelloHelloHelloHelloHelloHelloHel loHelloHelloHelloHelloHelloHello",
+  },
+  {
+    text: "Hello",
+  },
+  {
+    text: "Hello",
+  },
+  {
+    text: "Hello",
+  },
+];
+
+const MessagePage = () => {
+  return (
+    <MessageList list={messageList}/>
+  );
+};
 
 export default MessagePage;
