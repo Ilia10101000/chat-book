@@ -1,6 +1,8 @@
 "use client";
-import { MenuBookOutlined } from "@mui/icons-material";
-import { Paper, Box, InputBase, IconButton, Divider } from "@mui/material";
+import { Menu } from "@mui/icons-material";
+import { Paper, Box, TextField, IconButton, Divider } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
+import {styled} from "@mui/material";
 
 interface Message {
   text: string;
@@ -23,6 +25,7 @@ export function MessageList({ list }: { list: Array<Message> }) {
       >
         {list.map(({ text }, index) => (
           <Paper
+            key={index}
             elevation={20}
             sx={{
               p: 2,
@@ -34,22 +37,38 @@ export function MessageList({ list }: { list: Array<Message> }) {
             {text}
           </Paper>
         ))}
-          </Box>
-          <Paper component={'form'} sx={{
-              display: 'flex',
-              position: 'fixed',
-              bottom:0
-          }}>
-              <IconButton>
-                  <MenuBookOutlined/>
-              </IconButton>
-              <InputBase />
-              <Divider/>
-              <IconButton>
-                  <MenuBookOutlined/>
-              </IconButton>
-              
-          </Paper>
+        <Box sx={{height:'50px'}}></Box>
+      </Box>
+      <Paper
+        elevation={24}
+        sx={{
+          position: "fixed",
+          bottom: 0,
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Box
+          component={"form"}
+          sx={{
+            display: "flex",
+            minWidth: "400px",
+            maxWidth: "600px",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <IconButton>
+            <Menu />
+          </IconButton>
+          <TextField multiline rows={2} sx={{ width: "100%" }} />
+          <Divider orientation="vertical" />
+          <IconButton>
+            <SendIcon />
+          </IconButton>
+        </Box>
+      </Paper>
     </Box>
   );
 }
