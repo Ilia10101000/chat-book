@@ -37,7 +37,7 @@ export function MessageList({ list }: { list: Array<Message> }) {
             {text}
           </Paper>
         ))}
-        <Box sx={{height:'50px'}}></Box>
+        <Box sx={{ height: "50px" }}></Box>
       </Box>
       <Paper
         elevation={24}
@@ -53,7 +53,7 @@ export function MessageList({ list }: { list: Array<Message> }) {
           component={"form"}
           sx={{
             display: "flex",
-            minWidth: "400px",
+            minWidth: "375px",
             maxWidth: "600px",
             justifyContent: "space-between",
             alignItems: "center",
@@ -62,7 +62,8 @@ export function MessageList({ list }: { list: Array<Message> }) {
           <IconButton>
             <Menu />
           </IconButton>
-          <TextField multiline rows={2} sx={{ width: "100%" }} />
+          <Divider orientation="vertical" />
+          <TextField fullWidth multiline maxRows={4} />
           <Divider orientation="vertical" />
           <IconButton>
             <SendIcon />

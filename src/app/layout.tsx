@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import { Theme } from "@/lib/theme";
+import CssBaseline from "@mui/material/CssBaseline";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "@chatbook",
@@ -16,7 +17,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
+      <CssBaseline/>
         <Theme>{children}</Theme>
       </body>
     </html>
