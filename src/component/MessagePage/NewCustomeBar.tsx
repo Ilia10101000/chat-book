@@ -20,6 +20,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import GroupIcon from "@mui/icons-material/Group";
 import TuneIcon from "@mui/icons-material/Tune";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import Link from "next/link";
 
 const drawerListItems = [
   { label: "Friends", icon: <GroupIcon /> },
@@ -28,30 +29,33 @@ const drawerListItems = [
 ];
 
 const drawerInner = drawerListItems.map(({ label, icon }) => (
-  <ListItemButton
-    key={label}
-    sx={{
-      minHeight: 48,
-      justifyContent:"initial",
-      px: 2.5,
-    }}
+  <Link
+    href={`/${label.toLowerCase()}`}
+    style={{ textDecoration: "none", color: "inherit" }}
   >
-    <ListItemIcon
+    <ListItemButton
+      key={label}
       sx={{
-        minWidth: 0,
-        mr: 3,
-        justifyContent: "center",
+        minHeight: 48,
+        justifyContent: "initial",
+        px: 2.5,
       }}
     >
-      {icon}
-    </ListItemIcon>
-    <ListItemText
-      primary={label}
-    />
-  </ListItemButton>
+      <ListItemIcon
+        sx={{
+          minWidth: 0,
+          mr: 3,
+          justifyContent: "center",
+        }}
+      >
+        {icon}
+      </ListItemIcon>
+      <ListItemText primary={label} />
+    </ListItemButton>
+  </Link>
 ));
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -65,7 +69,7 @@ export default function CustomeBar({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
 
   const toogleDrawerOpen = () => {
-    setOpen(isOpen => !isOpen);
+    setOpen((isOpen) => !isOpen);
   };
 
   return (
@@ -79,7 +83,7 @@ export default function CustomeBar({ children }: { children: ReactNode }) {
             edge="start"
             sx={{
               marginRight: 5,
-              display: {xs:'block', sm:'none'},
+              display: { xs: "block", sm: "none" },
             }}
           >
             <MenuIcon />
@@ -87,37 +91,42 @@ export default function CustomeBar({ children }: { children: ReactNode }) {
           <Typography variant="h6">Custome Bar</Typography>
         </Toolbar>
       </AppBar>
-          <Drawer
-              variant="permanent"
-              sx={{
-                    display:{xs:'none',sm:'block'}
-                }}
-          >
+      <Drawer
+        variant="permanent"
+        sx={{
+          display: { xs: "none", sm: "block" },
+          width: `${drawerWidth}px`,
+          '& .MuiDrawer-paper': {
+            width: `${drawerWidth}px`,
+          }
+        }}
+      >
         <DrawerHeader>
-          <IconButton onClick={toogleDrawerOpen}>
-            <ChevronLeftIcon />
-          </IconButton>
+          <Typography variant="h6" sx={{ mx: "auto" }}>
+            <b>Chat Book</b>
+          </Typography>
         </DrawerHeader>
         <Divider />
-        <List>
-          {drawerInner}
-        </List>
+        <List>{drawerInner}</List>
       </Drawer>
-          <Drawer
-              open={open}
-              onClose={toogleDrawerOpen}
-              variant="temporary"
-              sx={{
-                    display:{xs:'block',sm:'none'}
-                }}
-          >
-        <DrawerHeader/>
+      <Drawer
+        open={open}
+        onClose={toogleDrawerOpen}
+        variant="temporary"
+        sx={{
+          display: { xs: "block", sm: "none" },
+        }}
+      >
+        <DrawerHeader />
         <Divider />
-        <List>
-          {drawerInner}
-        </List>
+        <List>{drawerInner}</List>
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1 }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1
+        }}
+      >
         <DrawerHeader />
         {children}
       </Box>

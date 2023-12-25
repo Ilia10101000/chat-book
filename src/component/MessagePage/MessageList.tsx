@@ -1,16 +1,14 @@
 "use client";
-import { Menu } from "@mui/icons-material";
-import { Paper, Box, TextField, IconButton, Divider } from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
-import {styled} from "@mui/material";
+
+import { Paper, Box} from "@mui/material";
 
 interface Message {
   text: string;
 }
 
 export function MessageList({ list }: { list: Array<Message> }) {
+
   return (
-    <Box>
       <Box
         sx={{
           minWidth: "300px",
@@ -39,37 +37,5 @@ export function MessageList({ list }: { list: Array<Message> }) {
         ))}
         <Box sx={{ height: "50px" }}></Box>
       </Box>
-      <Paper
-        elevation={24}
-        sx={{
-          position: "fixed",
-          bottom: 0,
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <Box
-          component={"form"}
-          sx={{
-            display: "flex",
-            minWidth: "375px",
-            maxWidth: "600px",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <IconButton>
-            <Menu />
-          </IconButton>
-          <Divider orientation="vertical" />
-          <TextField fullWidth multiline maxRows={4} />
-          <Divider orientation="vertical" />
-          <IconButton>
-            <SendIcon />
-          </IconButton>
-        </Box>
-      </Paper>
-    </Box>
   );
 }

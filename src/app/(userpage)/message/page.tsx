@@ -1,4 +1,5 @@
 import { MessageList } from "@/component/MessagePage/MessageList";
+import { MessageFooter } from "@/component/MessagePage/MessageFooter";
 
 const messageList = [
   {
@@ -38,7 +39,10 @@ const messageList = [
 
 const MessagePage = () => {
   return (
-    <MessageList list={messageList}/>
+    <>
+    <MessageList list={messageList} />
+    <MessageFooter/>
+    </>
   );
 };
 
