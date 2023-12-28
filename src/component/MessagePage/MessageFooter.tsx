@@ -1,26 +1,16 @@
 import { Paper, Box, TextField, IconButton } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 import SendIcon from "@mui/icons-material/Send";
-import { db } from '@/firebase/auth';
+import { fireStore } from "@/firebase/auth";
+import { collection, addDoc } from "firebase/firestore"; 
 import {ref, set,get,child,push, update } from "firebase/database";
 
 const setName = async (formData: FormData) => {
   'use server'
-  const message = formData.get('message');
-
-  push(child(ref(db), "users/value"));
-  // set(ref(db,'users'),{value:message});
-  // try {
-  //   const data = await get(child(ref(db), "users/value"));
-  //   if (data.exists()) {
-  //     console.log(data.val())
-  //   } else {
-  //     console.log('Petux')
-  //   }
-    
-  // } catch (error) {
-  //   console.log(error)
-  // }
+  const message = formData.get('message')
+  await addDoc(collection(fireStore, "users"), {
+    name: message
+  });
 
 }
 

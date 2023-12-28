@@ -46,10 +46,8 @@ export function MessageList({ list }: { list: Array<Message> }) {
             }}
           >
             {doc.data().name}
-            {/* {JSON.stringify(doc.data().name)} */}
           </Paper>
         ))}
-      4000$
         <Box sx={{ height: "50px" }}></Box>
       </Box>
   );
