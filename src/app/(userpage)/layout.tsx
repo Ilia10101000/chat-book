@@ -2,6 +2,7 @@
 import React, { ReactNode } from "react";
 import CustomeBar from "@/component/MessagePage/NewCustomeBar";
 
+
 interface LayoutProps {
   children: ReactNode;
 }

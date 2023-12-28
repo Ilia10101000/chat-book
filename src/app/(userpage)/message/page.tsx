@@ -1,6 +1,7 @@
 import { MessageList } from "@/component/MessagePage/MessageList";
 import { MessageFooter } from "@/component/MessagePage/MessageFooter";
 
+
 const messageList = [
   {
     text: "HelloHell oHelloHe lloHelloHelloHelloHell oHelloHelloHelloHelloHelloHello HelloHelloHelloHelloHelloHelloHello",
@@ -37,11 +38,13 @@ const messageList = [
   },
 ];
 
-const MessagePage = () => {
+const MessagePage = async () => {
+
+
   return (
     <>
-    <MessageList list={messageList} />
-    <MessageFooter/>
+      <MessageList list={messageList} />
+      <MessageFooter />
     </>
   );
 };

@@ -1,12 +1,25 @@
 "use client";
 
-import { Paper, Box} from "@mui/material";
+import { Paper, Box } from "@mui/material";
+import { collection } from "firebase/firestore";
+import { useCollection } from "react-firebase-hooks/firestore";
+import { fireStore } from "@/firebase/auth";
 
 interface Message {
-  text: string;
+  name: string;
 }
 
 export function MessageList({ list }: { list: Array<Message> }) {
+
+  const [message, loading, error] = useCollection(
+    collection(fireStore, "users")
+  );
+
+  if (loading) {
+    return (
+      <div>Loading</div>
+    )
+  }
 
   return (
       <Box
@@ -21,7 +34,7 @@ export function MessageList({ list }: { list: Array<Message> }) {
           background: "rgba(0,0,0,0.5)",
         }}
       >
-        {list.map(({ text }, index) => (
+        {message?.docs.map((doc, index) => (
           <Paper
             key={index}
             elevation={20}
@@ -32,9 +45,11 @@ export function MessageList({ list }: { list: Array<Message> }) {
               overflowWrap: "break-word",
             }}
           >
-            {text}
+            {doc.data().name}
+            {/* {JSON.stringify(doc.data().name)} */}
           </Paper>
         ))}
+      4000$
         <Box sx={{ height: "50px" }}></Box>
       </Box>
   );

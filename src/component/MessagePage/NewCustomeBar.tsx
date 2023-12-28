@@ -30,6 +30,7 @@ const drawerListItems = [
 
 const drawerInner = drawerListItems.map(({ label, icon }) => (
   <Link
+    key={label}
     href={`/${label.toLowerCase()}`}
     style={{ textDecoration: "none", color: "inherit" }}
   >
