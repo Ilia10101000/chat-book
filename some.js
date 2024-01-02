@@ -1,5 +1,1 @@
-const obj = {
-    email: 'Email',
-    name:'Name'
-}
-Object.keys(obj).forEach(form => console.log(obj[form]))
+console.log(new Array(4).fill('0').map(() => '10'))
