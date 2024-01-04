@@ -1,7 +1,7 @@
 "use client";
 
 import { Paper, Box } from "@mui/material";
-import { collection } from "firebase/firestore";
+import { collection, query, orderBy } from "firebase/firestore";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { fireStore } from "@/firebase/auth";
 import Skeleton from "@mui/material/Skeleton";
@@ -13,7 +13,10 @@ interface Message {
 export function MessageList({ list }: { list: Array<Message> }) {
 
   const [message, loading, error] = useCollection(
-    collection(fireStore, "users")
+    query(
+      collection(fireStore, "users"),
+      orderBy("time", "asc")
+    )
   );
 
   const skeleton = new Array(10)
@@ -44,14 +47,21 @@ export function MessageList({ list }: { list: Array<Message> }) {
         gap: "10px",
         height:'calc(100vh - 100px)',
         p: 5,
-        border:'1px solid red',
         display: "flex",
         flexDirection: "column",
         background: "rgba(0,0,0,0.5)",
       }}
     >
       {loading && skeleton}
-      {message?.docs.map((doc, index) => (
+      {message?.docs.map((doc, index) => {
+
+        const { message, time } = doc.data();
+
+        const createdAt = `${time.toDate().getHours()}:${time
+          .toDate()
+          .getMinutes()}`;
+        
+        return (
           <Paper
             key={index}
             elevation={20}
@@ -60,11 +70,13 @@ export function MessageList({ list }: { list: Array<Message> }) {
               alignSelf: index % 2 ? "flex-start" : "flex-end",
               maxWidth: "200px",
               overflowWrap: "break-word",
+              position:'relative'
             }}
           >
-            {doc.data().name}
+            {message}
+            <div style={{position:'absolute', bottom:'0px', right:'5px',fontSize:'11px', color:'grey', userSelect:'none'}}>{createdAt}</div>
           </Paper>
-        ))}
+        )})}
       <Box sx={{ height: "50px" }}></Box>
     </Box>
   );

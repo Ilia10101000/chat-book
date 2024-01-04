@@ -1,40 +1,49 @@
+'use client'
 import { Paper, Box, TextField, IconButton } from "@mui/material";
 import { Menu } from "@mui/icons-material";
 import SendIcon from "@mui/icons-material/Send";
-import { fireStore } from "@/firebase/auth";
-import { collection, addDoc } from "firebase/firestore"; 
-import {ref, set,get,child,push, update } from "firebase/database";
+import { addMessage } from "@/firebase/lib/addMessageDoc";
+import { FormEvent } from "react";
+import { useState } from "react";
 
-const setName = async (formData: FormData) => {
-  'use server'
-  const message = formData.get('message')
-  await addDoc(collection(fireStore, "users"), {
-    name: message
-  });
 
-}
 
 const MessageFooter = () => {
+
+  const [message, setMessage] = useState('');
+
+  const handleFormSubmit = async (event:FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    await addMessage(message);
+    setMessage('')
+  }
+
   return (
     <Paper
       sx={{
         position: "fixed",
         bottom: 0,
-        width: {xs:'100%', sm: "calc(100% - 200px)" },
+        width: { xs: "100%", sm: "calc(100% - 200px)" },
         display: "flex",
         justifyContent: "center",
       }}
     >
-      <form action={setName}>
+      <form onSubmit={handleFormSubmit}>
         <IconButton>
           <Menu />
         </IconButton>
-        <TextField name="message" fullWidth multiline maxRows={4} sx={{ width:{xs:'275px',sm:'375px'} }} />
+        <TextField
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          fullWidth
+          multiline
+          maxRows={4}
+          sx={{ width: { xs: "275px", sm: "375px" } }}
+        />
         <IconButton type="submit">
           <SendIcon />
         </IconButton>
       </form>
-      
     </Paper>
   );
 };
