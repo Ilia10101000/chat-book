@@ -7,14 +7,14 @@ const CustomeInput = (props: any) => {
       <Box>
           <InputMask
             {...props} maskChar={""} alwaysShowMask={false}>
-            {(prop: any) => <TextField {...prop} />}
+            {(prop: any) => <TextField sx={{width:'250px'}} {...prop} />}
           </InputMask>
       </Box>
     );
   }
   return (
     <Box>
-      <TextField {...props}/>
+      <TextField sx={{width:'250px'}} {...props}/>
     </Box>
       );
 };

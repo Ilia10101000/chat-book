@@ -1,6 +1,5 @@
 import * as Yup from "yup";
 
-
 interface IFormsList {
   label: string;
   name: string;
@@ -9,7 +8,7 @@ interface IFormsList {
     schema?: (val: string) => string;
   };
   withMask: {
-    value: false;
+    value: boolean;
     mask?: string;
   };
 }
@@ -21,15 +20,25 @@ const transformNameValue = (value: string) => {
   return value.trim().replace(/\s{2,}/g, " ");
 };
 
-
-const ValidationSchema = Yup.object({
+const emailValidationSchema = Yup.object({
   email: Yup.string()
     .matches(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i, "Enter a valid email")
     .required("Email is required"),
+  password: Yup.string()
+    .min(6, "Min lenght is 6 letters")
+    .max(40, "Your password too long")
+    .required('Set password for your account')
+  ,
+}).shape({});
+
+const loginValidationSchema = Yup.object({
   name: Yup.string()
     .min(2, "Enter your name")
     .matches(/^(?!-)(?!.*-\s*-)[A-Za-zА-Яа-яЁё -]+$/, "Check typed value")
     .required("Name is required"),
+});
+
+const phoneValidationSchema = Yup.object({
   phone: Yup.string()
     .min(18, "Enter valid phone")
     .matches(
@@ -39,19 +48,7 @@ const ValidationSchema = Yup.object({
     .required("Phone is required"),
 }).shape({});
 
-
-const formsList = [
-  {
-    label: "Name",
-    name: "name",
-    shouldTransform: {
-      value: true,
-      schema: transformNameValue,
-    },
-    withMask: {
-      value: false,
-    },
-  },
+const emailFormsList:Array<IFormsList> = [
   {
     label: "Email",
     name: "email",
@@ -63,6 +60,34 @@ const formsList = [
       value: false,
     },
   },
+  {
+    label: 'Password',
+    name: 'password',
+    shouldTransform: {
+      value:false
+    },
+    withMask: {
+      value:false
+    }
+  }
+
+];
+
+const loginFormList: Array<IFormsList> = [
+  {
+    label: "Name",
+    name: "name",
+    shouldTransform: {
+      value: true,
+      schema: transformNameValue,
+    },
+    withMask: {
+      value: false,
+    },
+  },
+];
+
+const phoneFormList: Array<IFormsList> = [
   {
     label: "Phone",
     name: "phone",
@@ -76,7 +101,10 @@ const formsList = [
   },
 ];
 
+
 export {
-  formsList,
-  ValidationSchema
+  emailFormsList,
+  emailValidationSchema,
+  phoneValidationSchema,
+  phoneFormList,
 };

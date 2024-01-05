@@ -3,15 +3,11 @@ import { CustomeInput } from "./CustomeInput";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import { Stack } from "@mui/material";
-import {ValidationSchema,formsList} from '@/lib/formsParam'
+import { phoneValidationSchema, phoneFormList } from "@/lib/formsParam";
 
-
-
-function Forms() {
+function PhoneForm() {
   const formik = useFormik({
     initialValues: {
-      email: "",
-      name: "",
       phone: "",
     },
     onSubmit: (value) => {
@@ -19,7 +15,7 @@ function Forms() {
         console.log(value);
       }, 3000);
     },
-    validationSchema: ValidationSchema,
+    validationSchema: phoneValidationSchema,
   });
 
   return (
@@ -31,7 +27,7 @@ function Forms() {
           alignItems: "center",
         }}
       >
-        {formsList.map((form) => (
+        {phoneFormList.map((form) => (
           <CustomeInput
             autoComplete="off"
             label={form.label}
@@ -58,11 +54,11 @@ function Forms() {
           />
         ))}
         <Button type="submit" variant="contained" disabled={!formik.isValid}>
-          Send
+          Get a code
         </Button>
       </Stack>
     </form>
   );
 }
 
-export { Forms };
+export { PhoneForm };
