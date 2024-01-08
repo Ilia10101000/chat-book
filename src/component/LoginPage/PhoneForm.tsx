@@ -1,22 +1,34 @@
 "use client";
 import { CustomeInput } from "./CustomeInput";
 import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
 import { useFormik } from "formik";
-import { Stack } from "@mui/material";
+import { IconButton, Stack, TextField } from "@mui/material";
 import { phoneValidationSchema, phoneFormList } from "@/lib/formsParam";
+import { useState } from "react";
 
-function PhoneForm() {
+interface IPhoneForm {
+  handleSubmit: (phone: string) => void;
+  sendCode?: (code: string) => void;
+}
+
+function PhoneForm({ handleSubmit, sendCode }: IPhoneForm) {
+
+  const [showCodeInput, setShowCodeInput] = useState(true);
+  const [verificationCode, setVerificationCode] = useState('')
+
   const formik = useFormik({
     initialValues: {
       phone: "",
     },
     onSubmit: (value) => {
-      setTimeout(() => {
-        console.log(value);
-      }, 3000);
+      const { phone } = value;
+      handleSubmit(phone);
+      setShowCodeInput(true);
     },
     validationSchema: phoneValidationSchema,
   });
+
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -53,9 +65,24 @@ function PhoneForm() {
             key={form.name}
           />
         ))}
-        <Button type="submit" variant="contained" disabled={!formik.isValid}>
+        <Button
+          id="sign-in-button"
+          type="submit"
+          variant="contained"
+          disabled={!formik.isValid}
+        >
           Get a code
         </Button>
+        {showCodeInput && (
+          <TextField
+            value={verificationCode}
+            onChange={e => setVerificationCode(e.target.value)}
+            label="Enter verification code"
+            InputProps={{
+              endAdornment: <IconButton onClick={() => sendCode(verificationCode)}><SendIcon/></IconButton>,
+            }}
+          />
+        )}
       </Stack>
     </form>
   );

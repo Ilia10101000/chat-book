@@ -9,12 +9,14 @@ import { emailValidationSchema, emailFormsList } from "@/lib/formsParam";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import { useState } from "react";
-import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import {auth} from '@/firebase/auth'
+
+interface IEmailForms{
+  handleSubmit : (email:string,password:string) => void
+}
 
 
 
-function EmailForms() {
+function EmailForms({handleSubmit}:IEmailForms) {
 
   const [isShownPassword, setIsShownPassword] = useState(false);
 
@@ -28,9 +30,8 @@ function EmailForms() {
       password:""
     },
     onSubmit: (value) => {
-      setTimeout(() => {
-        signInWithEmailAndPassword(auth,value.email,value.password)
-      }, 3000);
+      const { email, password } = value;
+      handleSubmit(email,password)
     },
     validationSchema: emailValidationSchema,
   });
@@ -54,7 +55,7 @@ function EmailForms() {
             id={form.name}
             name={form.name}
             InputProps={
-              form.name === "password" && {
+              form.name === "password"? ({
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton onClick={toogleVisibilityPassword}>
@@ -62,7 +63,7 @@ function EmailForms() {
                     </IconButton>
                   </InputAdornment>
                 ),
-              }
+              }) : null
             }
             helperText={formik.touched[form.name] && formik.errors[form.name]}
             error={
